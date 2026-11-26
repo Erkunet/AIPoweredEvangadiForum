@@ -20,29 +20,29 @@ const PostQuestion = () => {
   const navigate = useNavigate();
   const textareaRef = useRef(null);
 
-  // Form state
   const [formData, setFormData] = useState({
-    title: "",
-    content: "",
+    // Holds the user's input values for the question form
+    title: "", // Question title input value
+    content: "", // Question body/content input value
   });
 
   // Field-level validation errors
   const [fieldErrors, setFieldErrors] = useState({
-    title: "",
-    content: "",
+    title: "", // Error message for the title field
+    content: "", // Error message for the content field
   });
 
   // Submission & AI Coach states
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isCoaching, setIsCoaching] = useState(false);
-  const [error, setError] = useState("");
-  const [createdQuestion, setCreatedQuestion] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false); // True while publishing the question to the server
+  const [isCoaching, setIsCoaching] = useState(false); // True while waiting for AI draft feedback
+  const [error, setError] = useState(""); // General error message from server or network failures
+  const [createdQuestion, setCreatedQuestion] = useState(null); // Stores the saved question data after posting
 
   // AI Draft Coach state
-  const [showCoach, setShowCoach] = useState(false);
-  const [coachFeedback, setCoachFeedback] = useState(null);
+  const [showCoach, setShowCoach] = useState(false); // Controls whether the AI coach panel is visible
+  const [coachFeedback, setCoachFeedback] = useState(null); // Stores { feedback, suggestions } returned by AI
 
-  const isBusy = isSubmitting || isCoaching;
+  const isBusy = isSubmitting || isCoaching; // True if either posting or AI coaching is in progress (used to disable actions)
 
   // Validate title (5-255 chars) & content (min 10 chars)
   const validateForm = (data = formData) => {

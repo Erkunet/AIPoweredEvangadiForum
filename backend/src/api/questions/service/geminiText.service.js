@@ -89,7 +89,6 @@ Give practical suggestions that help the user improve their draft.
     if (error instanceof ServiceUnavailableError) {
       throw error;
     }
-
     console.error("Gemini Draft Coach Error:", error);
 
     throw new ServiceUnavailableError(
