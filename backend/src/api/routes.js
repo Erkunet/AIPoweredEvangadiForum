@@ -1,26 +1,15 @@
-
-import express from 'express';
-
-import authRoutes from './auth/routes/auth.routes.js';
-import questionRoutes from './questions/routes/question.routes.js';
-import answerRoutes from './answers/routes/answer.routes.js';
-
-import answerInteractionRoutes from './answers/routes/answerInteraction.routes.js';
-
-import userRoutes from "./users/routes/user.routes.js";
-
-import reportRoutes from "./reports/routes/report.routes.js";
+import express from "express";
+import authRoutes from "./auth/routes/auth.routes.js";
+import questionRoutes from "./questions/routes/question.routes.js";
+import answerRoutes from "./answers/routes/answer.routes.js";
 
 export const mainRouter = express.Router();
 
-mainRouter.use('/users', userRoutes);
+// Authentication routes
+mainRouter.use("/auth", authRoutes);
 
-mainRouter.use('/auth', authRoutes);
+// Questions routes (T-09, T-10, T-11)
+mainRouter.use("/questions", questionRoutes);
 
-mainRouter.use('/questions', questionRoutes);
-
-mainRouter.use('/questions', answerRoutes);
-
-mainRouter.use('/answers', answerInteractionRoutes);
-
-mainRouter.use("/admin/reports", reportRoutes);
+// Answers routes (T-12)
+mainRouter.use("/answers", answerRoutes);

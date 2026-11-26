@@ -1,4 +1,4 @@
-import { StatusCodes } from 'http-status-codes';
+import { StatusCodes } from "http-status-codes";
 
 class CustomAPIError extends Error {
   constructor(message) {
@@ -13,17 +13,24 @@ export class BadRequestError extends CustomAPIError {
   }
 }
 
-export class NotFoundError extends CustomAPIError {
-  constructor(message) {
-    super(message);
-    this.statusCode = StatusCodes.NOT_FOUND; // 404
-  }
-}
-
 export class UnauthenticatedError extends CustomAPIError {
   constructor(message) {
     super(message);
     this.statusCode = StatusCodes.UNAUTHORIZED; // 401
+  }
+}
+
+export class ForbiddenError extends CustomAPIError {
+  constructor(message) {
+    super(message);
+    this.statusCode = StatusCodes.FORBIDDEN; // 403
+  }
+}
+
+export class NotFoundError extends CustomAPIError {
+  constructor(message) {
+    super(message);
+    this.statusCode = StatusCodes.NOT_FOUND; // 404
   }
 }
 
