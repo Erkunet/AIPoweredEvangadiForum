@@ -6,10 +6,10 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Auth from "./pages/Auth/Auth";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Landing from "./pages/Landing/Landing";
-import AskQuestion from "./pages/AskQuestion/AskQuestion";
 import MyQuestions from "./pages/MyQuestions/MyQuestions";
 import QuestionDetail from "./pages/QuestionDetail/QuestionDetail";
 import KnowledgeBase from "./pages/KnowledgeBase/KnowledgeBase";
+import PostQuestion from "./pages/PostQuestion/PostQuestion";
 
 function App() {
   return (
@@ -34,7 +34,7 @@ function App() {
               path="/questions/ask"
               element={
                 <ProtectedRoute>
-                  <AskQuestion />
+                  <PostQuestion />
                 </ProtectedRoute>
               }
             />

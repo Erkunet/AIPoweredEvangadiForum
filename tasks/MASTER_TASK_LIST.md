@@ -78,7 +78,8 @@ _The core community forum functionality, featuring AI-assisted drafting and answ
 
 - **Task Name**: AI Question Draft Coach (`T-17`)
 
-  - **Description**: Implement `POST /api/questions/draft-coach` to provide real-time AI feedback and tips on question drafts.
+  -
+   **Description**: Implement `POST /api/questions/draft-coach` to provide real-time AI feedback and tips on question drafts.
   - **Reference**: `/question/draft-coach.md`
 
 - **Task Name**: AI Answer Fit Evaluation (`T-18`)

@@ -1,5 +1,7 @@
 // backend/src/api/questions/controller/question.controller.js
+import { StatusCodes } from "http-status-codes";
 import * as questionService from "../services/question.service.js";
+import { generateQuestionDraftCoachService } from "../service/geminiText.service.js";
 
 export async function createQuestionController(req, res, next) {
   try {
@@ -60,18 +62,29 @@ export async function getSimilarQuestionsController(req, res, next) {
     next(err);
   }
 }
-
-export async function draftCoachController(req, res, next) {
+export const generateQuestionDraftCoachController = async (req, res, next) => {
   try {
-    const feedback = await questionService.coachQuestionDraft({
-      title: req.body.title,
-      content: req.body.content,
+    // 1. Extract title and content from the request
+    const { title, content } = req.body;
+
+    // 2. Call the Gemini service
+    const result = await generateQuestionDraftCoachService({
+      title,
+      content,
     });
-    res.status(200).json(feedback);
-  } catch (err) {
-    next(err);
+
+    // 3. Return the response
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Draft suggestions generated",
+      data: {
+        tips: [result.feedback, ...result.suggestions],
+      },
+    });
+  } catch (error) {
+    next(error);
   }
-}
+};
 
 export async function answerFitController(req, res, next) {
   try {

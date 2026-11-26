@@ -5,11 +5,14 @@ import {
   createQuestionController,
   listQuestionsController,
   semanticSearchController,
-  draftCoachController,
   getSingleQuestionController,
   getSimilarQuestionsController,
   answerFitController,
 } from "../controller/question.controller.js";
+
+import { generateQuestionDraftCoachController } from "../controller/question.controller.js";
+
+import { generateQuestionDraftCoachValidation } from "../validations/question.validation.js";
 
 const router = express.Router();
 
@@ -20,7 +23,13 @@ router.get("/", listQuestionsController);
 router.get("/search", semanticSearchController);
 
 // Placed BEFORE /:questionHash so "draft-coach" is matched as a literal route
-router.post("/draft-coach", draftCoachController);
+
+router.post(
+  "/draft-coach",
+  authenticateUser,
+  generateQuestionDraftCoachValidation,
+  generateQuestionDraftCoachController,
+);
 
 router.get("/:questionHash", getSingleQuestionController);
 router.get("/:questionHash/similar", getSimilarQuestionsController);
