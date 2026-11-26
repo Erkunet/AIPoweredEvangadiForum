@@ -1,5 +1,5 @@
-// backend/src/utils/gemini.js
-const DEFAULT_EMBEDDING_MODEL = "gemini-embedding-001";
+
+const DEFAULT_EMBEDDING_MODEL = 'gemini-embedding-001';
 const DEFAULT_TEXT_MODEL = "gemini-2.5-flash";
 
 export async function generateEmbedding(text) {
