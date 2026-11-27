@@ -1,33 +1,22 @@
-/**
- * Global design tokens and base styles for Evangadi Forum (frontend).
- *
- * - Page-specific layout lives in `*.module.css` files next to each component.
- * - Shared “list empty / loading” patterns live in `src/styles/pageStates.module.css`.
- * - Layout widths: `--app-content-max` (main column), `--app-prose-max` (wide copy
- *   blocks), `--app-form-max` (narrow forms). Authenticated pages rely on
- *   `Layout.module.css` `.layout__mainInner` for the outer cap. Avoid duplicating
- *   `max-width` on page roots unless a page is outside that shell (e.g. `/`, `/auth`).
- * - When you add new features, prefer new CSS variables here only if the whole app
- *   should use them; otherwise keep styles local to the page module.
- */
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
 
 :root {
   /* Primary colors (Orange-based) */
-  --primary: #f97316; /* Tailwind Orange-500 */
-  --primary-hover: #ea580c; /* Tailwind Orange-600 */
-  --primary-light: #ffedd5; /* Tailwind Orange-100 */
-  --primary-dark: #c2410c; /* Tailwind Orange-700 */
-  --primary-container: #ea580c; /* Tailwind Orange-600 */
+  --primary: #f97316;
+  --primary-hover: #ea580c;
+  --primary-light: #ffedd5;
+  --primary-dark: #c2410c;
+  --primary-container: #ea580c;
 
   /* Secondary colors */
-  --secondary: #475569; /* Slate-600 */
-  --secondary-hover: #334155; /* Slate-700 */
+  --secondary: #475569;
+  --secondary-hover: #334155;
 
   /* Tertiary colors */
-  --tertiary: #0f172a; /* Slate-900 */
-  --tertiary-container: #1e293b; /* Slate-800 */
+  --tertiary: #0f172a;
+  --tertiary-container: #1e293b;
 
   /* Surface colors */
   --surface: #ffffff;
@@ -37,10 +26,10 @@
   --surface-container-highest: #cbd5e1;
 
   /* Text colors */
-  --text-primary: #0f172a; /* Slate-900 */
-  --text-secondary: #334155; /* Slate-700 (darkened for better contrast) */
-  --text-tertiary: #475569; /* Slate-600 (darkened for better contrast) */
-  --text-placeholder: #94a3b8; /* Slate-400 (dimmed for placeholders) */
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-tertiary: #475569;
+  --text-placeholder: #94a3b8;
   --text-inverse: #ffffff;
 
   /* Border colors */
@@ -124,105 +113,104 @@
   --app-form-max: 28rem;
 }
 
-/* Global Resets */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-html {
-  scroll-behavior: smooth;
-}
+  html {
+    scroll-behavior: smooth;
+  }
 
-body {
-  font-family: var(--font-sans);
-  color: var(--text-primary);
-  background-color: var(--background);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  body {
+    font-family: var(--font-sans);
+    color: var(--text-primary);
+    background-color: var(--background);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-a {
-  color: var(--primary);
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
+  a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
 
-a:hover {
-  color: var(--primary-hover);
-}
+  a:hover {
+    color: var(--primary-hover);
+  }
 
-button {
-  font-family: inherit;
-  cursor: pointer;
-}
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
 
-input,
-textarea,
-select {
-  font-family: inherit;
-}
+  input,
+  textarea,
+  select {
+    font-family: inherit;
+  }
 
-input::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder {
-  color: var(--text-placeholder);
-  opacity: 0.4;
-}
+  input::-webkit-input-placeholder,
+  textarea::-webkit-input-placeholder {
+    color: var(--text-placeholder);
+    opacity: 0.4;
+  }
 
-input:-ms-input-placeholder,
-textarea:-ms-input-placeholder {
-  color: var(--text-placeholder);
-  opacity: 0.4;
-}
+  input:-ms-input-placeholder,
+  textarea:-ms-input-placeholder {
+    color: var(--text-placeholder);
+    opacity: 0.4;
+  }
 
-input::placeholder,
-textarea::placeholder {
-  color: var(--text-placeholder);
-  opacity: 0.4; /* Reduced opacity for more dim, gray appearance */
-}
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--text-placeholder);
+    opacity: 0.4;
+  }
 
-/* Global Focus Styles for Inputs and Textareas */
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none;
-  border-color: var(--primary) !important;
-  box-shadow: 0 0 0 1px var(--primary) !important;
-  transition: border-color var(--transition-fast),
-    box-shadow var(--transition-fast);
-}
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 1px var(--primary);
+    transition: border-color var(--transition-fast),
+      box-shadow var(--transition-fast);
+  }
 
-/* Base Typography */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--text-primary);
-  font-weight: var(--font-semibold);
-  line-height: 1.2;
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--text-primary);
+    font-weight: var(--font-semibold);
+    line-height: 1.2;
+  }
 
-h1 {
-  font-size: var(--text-4xl);
-}
-h2 {
-  font-size: var(--text-3xl);
-}
-h3 {
-  font-size: var(--text-2xl);
-}
-h4 {
-  font-size: var(--text-xl);
-}
-h5 {
-  font-size: var(--text-lg);
-}
-h6 {
-  font-size: var(--text-base);
+  h1 {
+    font-size: var(--text-4xl);
+  }
+  h2 {
+    font-size: var(--text-3xl);
+  }
+  h3 {
+    font-size: var(--text-2xl);
+  }
+  h4 {
+    font-size: var(--text-xl);
+  }
+  h5 {
+    font-size: var(--text-lg);
+  }
+  h6 {
+    font-size: var(--text-base);
+  }
 }
