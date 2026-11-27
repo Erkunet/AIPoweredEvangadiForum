@@ -68,7 +68,7 @@ export default function Navbar({ title, subtitle, user, onLogout }) {
 
       <form className={styles.navbar__search} onSubmit={handleSearchSubmit}>
         <div className={styles['navbar__search-icon']}>
-          <Search size={16} />
+          <Search size={15} />
         </div>
         <input
           id='search'
