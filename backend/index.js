@@ -1,3 +1,4 @@
+import 'dotenv/config.js'
 import express from 'express';
 import { db } from './db/config.js';
 import { mainRouter } from './src/api/routes.js';
@@ -27,12 +28,12 @@ const startServer = async () => {
     // Test database connection
     const connection = await db.getConnection();
 
-    console.log('Database connection established successfully.');
+    console.log("Database connection established successfully.");
     connection.release();
-
-    app.listen(port, err => {
+    
+    app.listen(port, (err) => {
       if (err) {
-        console.error('Failed to start the server:', err.message);
+        console.error("Failed to start the server:", err.message);
         process.exit(1);
       }
       console.log(`Server running on port http://localhost:${port}`);
