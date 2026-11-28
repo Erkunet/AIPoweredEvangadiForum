@@ -23,4 +23,9 @@ mainRouter.use("/questions", questionRoutes);
 
 // Answers routes (T-12)
 mainRouter.use("/answers", answerRoutes);
+
+mainRouter.use('/answers', answerInteractionRoutes);
+
+mainRouter.use('/answers', answerInteractionRoutes);
+
  main
