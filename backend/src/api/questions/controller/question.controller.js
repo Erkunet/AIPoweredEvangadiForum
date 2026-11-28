@@ -73,14 +73,30 @@ export async function draftCoachController(req, res, next) {
   }
 }
 
-export async function answerFitController(req, res, next) {
+export const assessAnswerAgainstQuestionController = async (
+  req,
+  res,
+  next,
+) => {
   try {
-    const evaluation = await questionService.evaluateAnswerFit({
-      questionHash: req.params.questionHash,
-      draftAnswer: req.body.draftAnswer ?? req.body.content ?? req.body.answer,
+    const { questionHash } = req.params;
+    const { answerText } = req.body;
+
+    // Load the question so the AI can compare the draft against it
+    const { question } = await questionService.getSingleQuestionService({ questionHash });
+
+    const data = await questionService.assessAnswerAgainstQuestionService({
+      questionTitle: question.title,
+      questionContent: question.content,
+      answerText,
     });
-    res.status(200).json(evaluation);
-  } catch (err) {
-    next(err);
+
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: 'Answer fit assessed.',
+      data,
+    });
+  } catch (error) {
+    next(error);
   }
-}
+};
