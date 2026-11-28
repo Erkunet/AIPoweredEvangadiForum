@@ -17,24 +17,32 @@ import {
  * @param {number} [params.threshold] - Minimum cosine similarity (0-1).
  * @returns {Promise<Object>} Matching questions and search metadata.
  */
-export const searchQuestionsSemanticService = async ({
-  query,
-  k,
-  threshold,
-}) => {
+export const searchQuestionsSemanticService = async ({ query, k, threshold }) => {
+  //
+  // Defensive check matching Step 1 of Logic Steps (min 5 chars)
+  const trimmedQuery = typeof query === "string" ? query.trim() : "";
+  if (trimmedQuery.length < 5) {
+    const error = new Error("Search query must be at least 5 characters long.");
+    error.statusCode = 400;
+    throw error;
+  }
+  //
   const vectorConfig = getVectorConfig();
+
+  // Default k = 5, min 1, max 20
   const normalizedK =
-    k !== undefined && Number(k) > 0
-      ? Math.min(Number(k), 20)
-      : vectorConfig.defaultLimit;
+    k !== undefined && Number(k) >= 1
+      ? Math.min(Math.floor(Number(k)), 20)
+      : (vectorConfig.defaultLimit ?? 5);
+  // Default threshold = 0.75 (0–1 range)
   const searchThreshold =
     threshold !== undefined && !Number.isNaN(Number(threshold))
       ? Number(threshold)
-      : vectorConfig.threshold;
+      : (vectorConfig.threshold ?? 0.75);
 
-  const sourceText = normalizeQuestionText(query);
+  const sourceText = normalizeQuestionText(trimmedQuery);
 
-  // Step 1-5: Embed query (RETRIEVAL_QUERY), score ready vectors, filter & take top K
+  // Steps 2-5: Embed query (RETRIEVAL_QUERY), fetch ready vectors, score, filter & take top K
   const rankedMatches = await findSimilarQuestionsByText(sourceText, {
     limit: normalizedK,
     threshold: searchThreshold,
@@ -47,7 +55,7 @@ export const searchQuestionsSemanticService = async ({
         total: 0,
         k: normalizedK,
         threshold: searchThreshold,
-        query,
+        query: trimmedQuery,
         questionHash: null,
       },
     };
@@ -117,10 +125,10 @@ export const searchQuestionsSemanticService = async ({
       total: data.length,
       k: normalizedK,
       threshold: searchThreshold,
-      query,
+      query: trimmedQuery,
       questionHash: null,
     },
   };
-};
+};;
 
 
