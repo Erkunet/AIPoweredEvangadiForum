@@ -1,0 +1,131 @@
+/* Answer Card */
+.card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Author */
+.authorRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.authorRow strong {
+    color: #1f2937;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.authorRow small {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+/* Answer Content */
+.answerText {
+    color: #374151;
+    font-size: 15px;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    margin: 0 0 20px;
+}
+
+/* Action Buttons */
+.actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.actions button {
+    padding: 9px 16px;
+    background: #f3f4f6;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.actions button:hover:not(:disabled) {
+    background: #e5e7eb;
+    color: #111827;
+}
+
+.actions button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.actions button[aria-pressed="true"] {
+    background: #e8f1ff;
+    border-color: #93c5fd;
+    color: #1d4ed8;
+}
+
+/* Edit Answer */
+.textarea {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 120px;
+    padding: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    resize: vertical;
+    outline: none;
+}
+
+.textarea:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+/* Error Message */
+.error {
+    color: #b91c1c;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .card {
+        padding: 16px;
+    }
+
+    .authorRow {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .actions {
+        gap: 8px;
+    }
+
+    .actions button {
+        padding: 8px 12px;
+    }
+}
