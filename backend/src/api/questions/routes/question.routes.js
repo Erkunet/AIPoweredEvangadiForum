@@ -8,7 +8,7 @@ import {
   draftCoachController,
   getSingleQuestionController,
   getSimilarQuestionsController,
-  answerFitController,
+assessAnswerAgainstQuestionController,
 } from "../controller/question.controller.js";
 
 const router = express.Router();
@@ -24,6 +24,12 @@ router.post("/draft-coach", draftCoachController);
 
 router.get("/:questionHash", getSingleQuestionController);
 router.get("/:questionHash/similar", getSimilarQuestionsController);
-router.post("/:questionHash/answer-fit", answerFitController);
+// POST /api/questions/:questionHash/answer-fit -> AI answer relevance check(T-18)
+router.post(
+  '/:questionHash/answer-fit',
+  authenticateUser,
+  assessAnswerAgainstQuestionValidation,
+  assessAnswerAgainstQuestionController,
+);
 
 export default router;
