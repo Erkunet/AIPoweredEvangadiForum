@@ -11,6 +11,8 @@ import answerRoutes from "./answers/routes/answer.routes.js";
  main
 export const mainRouter = express.Router();
 
+mainRouter.use('/users', userRoutes);
+
 // Authentication routes
 mainRouter.use("/auth", authRoutes);
  feature/T-11-semantic-search
@@ -26,6 +28,5 @@ mainRouter.use("/answers", answerRoutes);
 
 mainRouter.use('/answers', answerInteractionRoutes);
 
-mainRouter.use('/answers', answerInteractionRoutes);
 
  main
